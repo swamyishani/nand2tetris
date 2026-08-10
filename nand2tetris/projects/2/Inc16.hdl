@@ -11,5 +11,20 @@ CHIP Inc16 {
     OUT out[16];
 
     PARTS:
-    //// Replace this comment with your code.
+    HalfAdder(a=in[0], b=true, sum=out[0], carry=t1);
+    FullAdder(a=t1, b=in[1], c=false, sum=out[1], carry=t2);
+    FullAdder(a=t2, b=in[2], c=false, sum=out[2], carry=t3);
+    FullAdder(a=t3, b=in[3], c=false, sum=out[3], carry=t4);
+    FullAdder(a=t4, b=in[4], c=false, sum=out[4], carry=t5);
+    FullAdder(a=t5, b=in[5], c=false, sum=out[5], carry=t6);
+    FullAdder(a=t6, b=in[6], c=false, sum=out[6], carry=t7);
+    FullAdder(a=t7, b=in[7], c=false, sum=out[7], carry=t8);
+    FullAdder(a=t8, b=in[8], c=false, sum=out[8], carry=t9);
+    FullAdder(a=t9, b=in[9], c=false, sum=out[9], carry=t10);
+    FullAdder(a=t10, b=in[10], c=false, sum=out[10], carry=t11);
+    FullAdder(a=t11, b=in[11], c=false, sum=out[11], carry=t12);
+    FullAdder(a=t12, b=in[12], c=false, sum=out[12], carry=t13);
+    FullAdder(a=t13, b=in[13], c=false, sum=out[13], carry=t14);
+    FullAdder(a=t14, b=in[14], c=false, sum=out[14], carry=t15);
+    FullAdder(a=t15, b=in[15], c=false, sum=out[15], carry=t16);
 }
