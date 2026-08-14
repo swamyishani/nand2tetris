@@ -17,37 +17,19 @@ D;JNE
 D;JEQ
 @LOOP
 0;JMP
-@PIXELS
-M=16384
 (WHITE)
-  @SCREEN
-  D=M
-  (LOOP)
-  @PIXELS
-  M=M+1
-  D=M
+  (LOOP2)
   @SCREEN
   M=0
-  @DIFF
-  M=24576-D
-  @END
-  M;JEQ
-  @LOOP
+  D=D+A
+  @LOOP2
   0;JMP
-@BLACK
-  @SCREEN
-  D=M
-  (LOOP)
-  @PIXELS
-  M=M+1
-  D=M
+(BLACK)
+  (LOOP3)
   @SCREEN
   M=-1
-  @DIFF
-  M=24576-D
-  @END
-  M;JEQ
-  @LOOP
+  D=D+A
+  @LOOP3
   0;JMP
 (END)
 @END

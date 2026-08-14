@@ -25,5 +25,6 @@ CHIP Memory {
     OUT out[16];
 
     PARTS:
-	//// Replace this comment with your code.
+	Mux4Way16(a=ram, b=screen, c=kbd, d=false, sel=address[13..14], out=out);
+    mux
 }
