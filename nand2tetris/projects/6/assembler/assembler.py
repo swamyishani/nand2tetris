@@ -124,8 +124,6 @@ with open(hack_file, 'r') as asm_file:
         c_instruct = '111' + a_bit + dest_bits + comp_bits + jump_bits
         lines_to_be_kept.append(c_instruct)
 
-print(lines_to_be_kept)
-
 with open(hack_file, 'w') as asm_file:
     for line in lines_to_be_kept:
         asm_file.write(line + '\n')
