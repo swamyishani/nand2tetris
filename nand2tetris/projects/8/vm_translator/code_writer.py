@@ -87,7 +87,38 @@ class vm_code_writer:
 
   def writeIf(self, label):
     label_name=label.split()[0]
-    self.file.write(f'@SP\nAM=M-1\nD=M\n@{label_name}\nD;JMP')
+    self.file.write(f'@SP\nAM=M-1\nD=M\n@{label_name}\nD;JNE\n')
+    return
+
+  def writeFunction(self, function_name, n_vals):
+    self.file.write(f'({function_name})\n')
+    i=0
+    while i < int(n_vals):
+      self.file.write('@SP\nAM=M+1\nA=A-1\nM=0\n')
+    return
+
+  def writeCall(self, function_name, n_args):
+    self.file.write('@return_address\n')
+    self.file.write('@LCL\nD=M\n@SP\nAM=M+1\nA=A-1\nM=D\n')
+    self.file.write('@ARG\nD=M\n@SP\nAM=M+1\nA=A-1\nM=D\n')
+    self.file.write('@THIS\nD=M\n@SP\nAM=M+1\nA=A-1\nM=D\n')
+    self.file.write('@THAT\nD=M\n@SP\nAM=M+1\nA=A-1\nM=D\n')
+    self.file.write(f'@SP\nD=M\n@5\nD=D-A\n@{n_args}\nD=D-A\n@ARG\nM=D\n')
+    self.file.write('@SP\nD=M\n@LCL\nM=D\n')
+    self.writeGoto(function_name)
+    self.writeLabel('return_address')
+    return
+
+  def writeReturn(self):
+    self.file.write('@LCL\nD=M\n@SP\nM=D\n')
+    self.file.write('@R13\nD=M\n@5\nA=D-A\nD=M\n')
+    self.file.write('@R14\nM=D\n@SP\nAM=M-1\nD=M\n@ARG\nA=M\nM=D\n')
+    self.file.write('@ARG\nD=M+1\n@SP\nM=D\n')
+    self.file.write('@R13\nD=M\n@1\nA=D-A\nD=M\n@THAT\nM=D\n')
+    self.file.write('@R13\nD=M\n@2\nA=D-A\nD=M\n@THIS\nM=D\n')
+    self.file.write('@R13\nD=M\n@3\nA=D-A\nD=M\n@ARG\nM=D\n')
+    self.file.write('@R13\nD=M\n@4\nA=D-A\nD=M\n@LCL\nM=D\n')
+    self.file.write('@R14\nA=M\n0;JMP\n')
     return
 
   def close(self):

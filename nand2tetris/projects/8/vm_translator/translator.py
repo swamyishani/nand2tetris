@@ -22,6 +22,12 @@ while VM_Parser.hasMoreLines(count):
     VM_Code_Writer.writeGoto(VM_Parser.arg1())
   elif command_type == 'C_IF':
     VM_Code_Writer.writeIf(VM_Parser.arg1())
+  elif command_type == 'C_FUNCTION':
+    VM_Code_Writer.writeFunction(VM_Parser.arg1(), VM_Parser.arg2())
+  elif command_type == 'C_RETURN':
+    VM_Code_Writer.writeReturn()
+  elif command_type == 'C_CALL':
+    VM_Code_Writer.writeCall(VM_Parser.arg1(), VM_Parser.arg2())
   count+=1
   VM_Parser.advance(count)
 VM_Code_Writer.close()
