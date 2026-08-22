@@ -1,0 +1,30 @@
+class RNG {
+
+  static int newSeed;
+  var int seed;
+
+  function void setSeed(int newSeed) {
+    let seed = newSeed;
+    return;
+  }
+
+  function int generateNumber(int seed, int number) {
+    let seed = (seed * 10061) + 99997;
+    return seed;
+  }
+
+  function int ranging (int seed, int min, int max) {
+    if (seed < min) {
+      while (seed < min) {
+        let seed = seed + min/10;
+      }
+    }
+    if (seed > max) {
+      while (seed > max) {
+        let seed = seed - min/10;
+      }
+    }
+    return seed;
+  }
+
+}
